@@ -7,7 +7,7 @@
       <div class="mainViewBackground"></div>
       <transition :duration="{enter: 1000, leave: 200}" name="menuContanier">
         <div v-show="menuShow" class="menuContanier">
-          menu area
+          menu test
           <Folder :list="menuArray"></Folder>
           <div class="hideMenu" @click.stop="hideMenu">{{'<'}}</div>
         </div>
