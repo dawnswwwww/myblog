@@ -3,11 +3,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
+import axios from 'axios'
+Vue.prototype.axios = axios
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
-  render: (h) => h(App),
+  // render: (h) => h(App),
+  render: (h: (arg0: typeof App) => any) => h(App),
 }).$mount('#app');

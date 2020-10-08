@@ -10,15 +10,17 @@
       <div>
         <quill-editor class="editor" v-model="editorContent"></quill-editor>
       </div>
-      <div class="submit"><button @click="submit">发表</button></div>
+      <div class="controlContainer"><button class="save" @click="save">保存</button><button class="submit" @click="submit">发布</button></div>
   </div>
 </template>
 <style lang="less" scoped>
   .editorContainer {
-    // overflow-y: auto;
-
     .editor {
       height: 70vh;
+    }
+
+    .save {
+      margin-right: 20px;
     }
 
     .submit {
@@ -45,6 +47,33 @@ export default {
   methods: {
     submit() {
       console.log(this.editorContent)
+      if (this.editorContent) {
+        this.axios.post('http://localhost:3000/publish', {
+          type: '1',
+          value: this.editorContent
+        }).then((result) => {
+          console.log(result)
+        }).catch((err) => {
+          console.error(err)
+        })
+      } else {
+
+      }
+    },
+    save() {
+      console.log(this.editorContent)
+      if (this.editorContent) {
+        this.axios.post('http://localhost:3000/save', {
+          type: '1',
+          value: this.editorContent
+        }).then((result) => {
+          console.log(result)
+        }).catch((err) => {
+          console.error(err)
+        })
+      } else {
+
+      }
     }
   }
 }

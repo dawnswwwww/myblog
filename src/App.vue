@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
     <Home></Home>
   </div>
 </template>
@@ -12,6 +10,7 @@ import HelloWorld from './components/HelloWorld.vue';
 import Home from './views/Home.vue'
 
 @Component({
+  name: 'App',
   components: {
     HelloWorld,
     Home,

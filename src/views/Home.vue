@@ -108,8 +108,11 @@ export default {
   data() {
     return {
       menuShow: true,
-      menuArray: [{title: 'lala', subArray: [{content: '1', click: () => {console.log(123)}}, {content: 'about', src: '/about'}, {content: 'welcome', src: '/welcome'}, {content: '4'}, {content: '5'}]}, {title: 'haha', subArray: [{content: '1'}, {content: '2'}, {content: '3'}, {content: '4'}, {content: '5'}]}]
+      menuArray: [{title: 'lala', subArray: [{content: '1', click: () => {console.log(123)}}, {content: 'about', src: '/about'}, {content: 'iframetest', src: '/iframetest'}, {content: 'welcome', src: '/welcome'}, {content: '4'}, {content: '5'}]}, {title: 'haha', subArray: [{content: '1'}, {content: '2'}, {content: '3'}, {content: '4'}, {content: '5'}]}]
     }
+  },
+  beforeDestroy() {
+    window.alert('aaaaaaaaaaaa')
   },
   methods: {
     hideMenu() {
