@@ -30,7 +30,7 @@
 </style>
 <script>
 export default {
-  data () {
+  data() {
     return {
       username: '',
       password: ''
@@ -38,18 +38,34 @@ export default {
   },
   methods: {
     login() {
-      console.log('login')
+      console.log('login', this.Plugins)
       // console.log(this.axios)
-      this.axios.post('http://localhost:3000/login', {
-        username: this.username,
-        password: this.password
+      // this.axios.post('http://localhost:3000/login', {
+      //   username: this.username,
+      //   password: this.password
+      // }).then((result) => {
+      //   console.log(result)
+      //   if (result.data.statusCode === 1) {
+      //     window.alert(result.data.msg)
+      //   }
+      //   if (result.data.statusCode === 0) {
+      //     window.alert(result.data.msg)
+      //   }
+      // })
+
+      this.Plugins.request.api({
+        url: '/api/login',
+        params: {
+          username: this.username,
+          password: this.password
+        }
       }).then((result) => {
         console.log(result)
-        if (result.data.statusCode === 1) {
-          window.alert(result.data.msg)
+        if (result.statusCode === 1) {
+          window.alert(result.msg)
         }
-        if (result.data.statusCode === 0) {
-          window.alert(result.data.msg)
+        if (result.statusCode === 0) {
+          window.alert(result.msg)
         }
       })
     }

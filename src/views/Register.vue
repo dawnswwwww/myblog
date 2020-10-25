@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     register() {
-      this.axios.post('http://localhost:3000/register', {
+      this.axios.post('/api/register', {
         username: this.username,
         password: this.password
       }).then((result) => {

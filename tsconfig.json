@@ -14,7 +14,9 @@
     "types": [
       "webpack-env",
       "mocha",
-      "chai"
+      "chai",
+      "vue",
+      "axios"
     ],
     "paths": {
       "@/*": [
@@ -33,7 +35,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/**/*.d.ts",
+    "shims-vue.d"
   ],
   "exclude": [
     "node_modules"
