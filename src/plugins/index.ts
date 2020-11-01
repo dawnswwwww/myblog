@@ -1,15 +1,15 @@
-import request from './request'
+import api from './api'
 
 const Plugins = {
-    request
+    api
 }
 
 const install = (vue: Vue) => {
-    vue.Plugins = vue.prototype.Plugins = Plugins
+    vue.plugins = vue.prototype.plugins = Plugins
 }
 
 export default {
     install: (vue: Vue) => {
-        vue.Plugins = vue.prototype.Plugins = Plugins
+        vue.plugins = vue.prototype.plugins = Plugins
     }
 }

@@ -3,8 +3,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './registerServiceWorker';
-import axios from 'axios'
-Vue.prototype.axios = axios
 import plugins from './plugins'
 
 Vue.use(plugins)

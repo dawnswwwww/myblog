@@ -107,7 +107,7 @@ export default {
     save() {
       console.log(this.editorContent)
       if (this.editorContent) {
-        this.Plugins.request.api({url: '/api/save', params: {
+        this.plugins.api.request({url: '/api/save', params: {
           type: '1',
           value: this.editorContent
         }}).then((result) => {

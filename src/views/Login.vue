@@ -53,7 +53,7 @@ export default {
       //   }
       // })
 
-      this.Plugins.request.api({
+      this.plugins.api.request({
         url: '/api/login',
         params: {
           username: this.username,
