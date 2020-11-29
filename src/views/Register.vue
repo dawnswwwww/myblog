@@ -37,10 +37,10 @@ export default {
   },
   methods: {
     register() {
-      this.axios.post('/api/register', {
+      this.plugins.api.request({url: '/api/register', params:{
         username: this.username,
         password: this.password
-      }).then((result) => {
+      }}).then((result) => {
         console.log(result)
         if (result.data.statusCode === 1) {
           window.alert(result.data.msg)

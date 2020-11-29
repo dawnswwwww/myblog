@@ -9,7 +9,7 @@ const install = (vue: Vue) => {
 }
 
 export default {
-    install: (vue: Vue) => {
+    install: (vue: any) => {
         vue.plugins = vue.prototype.plugins = Plugins
     }
 }

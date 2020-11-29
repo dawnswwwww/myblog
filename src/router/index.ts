@@ -9,6 +9,7 @@ import Register from '../views/Register.vue'
 import About from '../views/About.vue'
 import View from '../views/View.vue'
 import Home from '../views/Home.vue'
+// import Detail from '../views/viewDetail.vue'
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,14 @@ const routes: RouteConfig[] = [
     path: '/',
     name: 'View',
     component: View,
+  },
+  {
+    path: '/detail/:id',
+    name: 'viewDetail',
+    component: () => import(
+      /* webpackChunkName: "viewDetail" */
+      '../views/viewDetail.vue'),
+
   },
   {
     path: '/home',

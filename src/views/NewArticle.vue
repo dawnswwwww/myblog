@@ -1,7 +1,7 @@
 <template>
   <div class="editorContainer">
       New Article
-      <div><label for="title">标题</label><input type="text" name="title"></div>
+      <div><label for="title">标题</label><input type="text" name="title" v-model="title" placeholder="请输入文章标题"></div>
       <div><label for="tags">标签</label><select name="tags" id="">
         <option value="A">A</option>
         <option value="B">B</option>
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       editorContent: '',
+      title: '',
       markdownOption: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -109,7 +110,8 @@ export default {
       if (this.editorContent) {
         this.plugins.api.request({url: '/api/save', params: {
           type: '1',
-          value: this.editorContent
+          value: this.editorContent,
+          title: this.title
         }}).then((result) => {
           console.log(result)
         }).catch((err) => {
