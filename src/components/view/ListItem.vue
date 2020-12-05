@@ -1,52 +1,85 @@
 <template>
-    <div class="ListItemContainer" @click="skip">
-        <div class="titleContainer">
-            <span class="sq"></span>
-            <span class="title">{{Adata.title}}</span>
+    <div class="ListItemContainer">
+        <div class="line"></div>
+        <div class="contentContainer">
+            <div class="titleContainer">
+            <span class="circle"></span>
+            <span class="title" @click="skip">{{Adata.title}}</span>
         </div>
         <div class="brief">{{Adata.content}}</div>
-        <!-- <div class="brief">asdasdasdasdasjajkhajasdasjhdjasdhasdkjaskdajjqubxqhbdjksabdjsabdjkasdjkhasjkdhasjkdasjkdjakshdjkashjdkashdjkksjkdashjkdsanb,asdhasjdbjabsdjbaskjbdasjbdasjkbakjsb</div> -->
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
     .ListItemContainer {
         height: 180px;
         // background-color: green;
-        border-bottom: 1px solid #ccc;
-        border-radius: 10px;
-        margin-top: 20px;
-        box-shadow: 5px 5px 12px 2px;
+        // border-bottom: 1px solid #ccc;
+        // border-radius: 10px;
+        // box-shadow: 1px 1px 1px;
         box-sizing: border-box;
-        padding: 10px;
+        position: relative;
+        padding-left: 30px;
         display: flex;
         flex-direction: column;
         background-color: #fff;
+
+        .line {
+            position: absolute;
+            height: 100%;
+            width: 5px;
+            background-color: black;
+        }
+
+        &:first-child {
+            .line {
+                // height: 50%;
+                bottom: 0;
+            }
+        }
+
+        &:last-child {
+            .line {
+                height: 0;
+                top: 0;
+            }
+        }
+
+        .contentContainer {
+            // position: relative;
+            // top: 50%;
+            // transform: translateY(-30px);
+        }
 
         .titleContainer {
             // height: 30px;
             text-align: left;
             font-weight: 700;
-            font-size: 48px;
+            font-size: 36px;
             padding-left: 25px;
-            border-bottom: 2px solid #ccc;
+            // border-bottom: 2px solid #ccc;
             position: relative;
 
-            .sq {
+            .circle {
                 position: absolute;
-                height: 30%;
-                width: 10px;
-                background-color: rgb(21, 168, 219);
-                top: 50%;
-                transform: translateY(-50%);
-                left: 0;
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                background-color: white;
+                border: 5px solid black;
+                // top: 50%;
+                // transform: translateY(-50%);
+                left: -18px;    
             }
 
             .title {
+                padding-left: 10px;
                 // border-bottom: 2px solid #ccc;
             }
         }
 
         .brief {
+            padding-left: 25px;
             margin-top: 15px;
             max-height: 120px;
             text-align: left;
@@ -58,6 +91,7 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             padding-bottom: 10px;
+            font-size: 12px;
         }
     }
 </style>
@@ -68,10 +102,16 @@ export default {
             required: true
         }
     },
+    inject:['pageSize'],
     methods: {
-        skip () {
-            this.$router.push({name: 'viewDetail', params: {id: this.Adata.article_id}})
+        skip (e) {
+            console.log(this.pageSize())
+            // this.$router.push({name: 'viewDetail', params: {id: this.Adata.article_id}})
+            // this.$router.push('/login')
         }
+    },
+    mounted() {
+        console.log(this.pageSize())
     },
 }
 </script>

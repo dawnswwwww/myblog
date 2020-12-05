@@ -11,7 +11,7 @@
           <Folder :list="menuArray"></Folder>
           <div class="hideMenu" @click.stop="hideMenu">{{'<'}}</div>
         </div>
-      </transition>
+      </transition>∂
       <div v-show="!menuShow" class="showMenu" @click="showMenu">></div>
       <div class="viewArea">
         <router-view></router-view>

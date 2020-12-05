@@ -18,6 +18,9 @@ const routes: RouteConfig[] = [
     path: '/',
     name: 'View',
     component: View,
+    meta: {
+      keepAlive: true // 需要被缓存的组件
+    }
   },
   {
     path: '/detail/:id',

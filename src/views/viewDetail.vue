@@ -88,7 +88,6 @@ export default {
         }
     },
     beforeMount () {
-        console.log(this.$router)
         this.id = this.$route.params.id
         this.getArtileDetail()
     },
@@ -122,7 +121,6 @@ export default {
                     id: this.id
                 }
             }).then((result) => {
-                // this.articleList = result
                 console.log(result)
                 this.articleData = result[0]
             })
