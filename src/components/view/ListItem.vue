@@ -102,16 +102,12 @@ export default {
             required: true
         }
     },
-    inject:['pageSize'],
     methods: {
         skip (e) {
-            console.log(this.pageSize())
-            // this.$router.push({name: 'viewDetail', params: {id: this.Adata.article_id}})
+            // console.log(this.pageSize())
+            this.$router.push({name: 'viewDetail', params: {id: this.Adata.article_id}})
             // this.$router.push('/login')
         }
-    },
-    mounted() {
-        console.log(this.pageSize())
-    },
+    }
 }
 </script>
