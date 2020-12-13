@@ -1,5 +1,7 @@
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 let TerserJSPlugin = require('terser-webpack-plugin')
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
+
 console.log('import vue config')
 
 module.exports = {
@@ -29,6 +31,20 @@ module.exports = {
   },
     configureWebpack: {
       plugins: [
+        new SkeletonWebpackPlugin({
+          webpackConfig: require('./config/webpack.skeleton.conf'),
+          quiet: true,
+          minimize: true,
+          router: {
+            mode: 'hash',
+            routes: [
+              {
+                path: '',
+                skeletonId: 'home'
+              }
+            ]
+          }
+        })
         // new UglifyJsPlugin({
         //   uglifyOptions: {
         //     compress: {
