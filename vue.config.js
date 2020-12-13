@@ -32,14 +32,14 @@ module.exports = {
     configureWebpack: {
       plugins: [
         new SkeletonWebpackPlugin({
-          webpackConfig: require('./config/webpack.skeleton.conf'),
+          webpackConfig: require('./config/webpack.skeleton.conf.js'),
           quiet: true,
           minimize: true,
           router: {
             mode: 'hash',
             routes: [
               {
-                path: '',
+                path: '/',
                 skeletonId: 'home'
               }
             ]

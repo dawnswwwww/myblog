@@ -1,35 +1,36 @@
 {
-  "name": "HackerWeb",
-  "short_name": "HackerWeb",
+  "name": "dawnswwwww",
+  "short_name": "dawnswwwww",
   "start_url": ".",
   "display": "standalone",
   "background_color": "lightblue",
-  "description": "A simply readable Hacker News app.",
+  "description": "dawnswwwww's blog",
   "icons": [{
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "48x48",
     "type": "image/png"
   }, {
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "72x72",
     "type": "image/png"
   }, {
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "96x96",
     "type": "image/png"
   }, {
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "144x144",
     "type": "image/png"
   }, {
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "168x168",
     "type": "image/png"
   }, {
-    "src": "public/img/icons/android-chrome-192x192.png",
+    "src": "public/img/icons/amateur.jpg",
     "sizes": "192x192",
     "type": "image/png"
   }],
+  
   "related_applications": [{
     "platform": "web"
   }, {

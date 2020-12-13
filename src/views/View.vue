@@ -101,7 +101,9 @@ export default {
     },
     methods: {
         getArticleList() {
-            if (this.bottom && this.requestFlag) return
+            if (this.bottom && this.requestFlag) {
+                return
+            }
             this.requestFlag = true
             this.plugins.api.request({
                 url: '/api/ViewArticleList',
@@ -125,7 +127,7 @@ export default {
             // console.log(e.target.scrollHeight)
             if (e.target.scrollTop >=  e.target.scrollHeight - e.target.clientHeight - 100) {
                 console.log('reach botoom')
-                this.getArticleList()                
+                this.getArticleList()
             }
             this.titleFixed = (e.target.scrollTop > 100 ? true : false)
         }
@@ -137,7 +139,10 @@ export default {
     },
     mounted() {
         console.log('viewMounted')
-        this.firstEnter && this.getArticleList()
+        if (this.firstEnter) {
+            this.getArticleList()
+        }
+        // this.firstEnter && this.getArticleList()
         setTimeout(() => {
             console.log('pageSize changed')
             this.pageSize = 100

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     register() {
-      this.plugins.api.request({url: '/api/register', params:{
+      this.plugins.api.request({url: '/api/register', params: {
         username: this.username,
         password: this.password
       }}).then((result) => {
