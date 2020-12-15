@@ -1,7 +1,6 @@
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 let TerserJSPlugin = require('terser-webpack-plugin')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
-const OmmitCSSPlugin = require('./config/ommit-css-webpack-plugin')
 
 console.log('import vue config')
 
@@ -37,7 +36,6 @@ module.exports = {
       //   outputDir: './dist'
       // },
       plugins: [
-        new OmmitCSSPlugin(),
         new SkeletonWebpackPlugin({
           webpackConfig: require('./config/webpack.skeleton.conf.js'),
           quiet: true,
@@ -98,22 +96,31 @@ module.exports = {
     //         automaticNameDelimiter: "~",
     //         name: true,
     //         cacheGroups: {
-    //             vendors: {
-    //                 test: /[\\/]node_modules[\\/]/,
-    //                 priority: -10,
-    //                 name(module, chunks, cacheGroupKey) {
-    //                   const moduleFileName = module.identifier().split('/').reduceRight(item => item);
-    //                   const allChunksNames = chunks.map((item) => item.name).join('~');
-    //                   return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
-    //                 },
-    //                 chunks: 'all'
-    //             },
-    //             default: {
-    //                 minChunks: 1,
-    //                 priority: -20,
-    //                 reuseExistingChunk: true
-    //             }
-    //         }
+    //           vendors: {
+    //               // test: /[\\/]node_modules[\\/]/,
+    //               // test: /[\\/]node_modules\/vue[\\/]/,
+    //               priority: 70,
+    //               name: 'vendors',
+    //               chunks: 'all'
+    //           },
+    //            'async-commons': { // 异步加载公共包、组件等
+    //               chunks: 'async',
+    //               minChunks: 2,
+    //               name: 'async-commons',
+    //               priority: 90,
+    //              },
+    //              commons: { // 其他同步加载公共包
+    //               test: /[\\/]node_modules[\\/]/,
+    //               chunks: 'async',
+    //               minChunks: 2,
+    //               name: 'commons',
+    //               priority: 100,
+    //              },
+    //           default: {
+    //               minChunks: 2,
+    //               priority: -20,
+    //               reuseExistingChunk: true
+    //           }}
     //     }
     // }
     }

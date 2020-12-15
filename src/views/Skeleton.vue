@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="skeleton-contaniner">
-            <div class="title" style="background-image: radial-gradient(#ccc 5%, #fff 84%, white 11%);height: 40px">123</div>
+            <div class="title" style="background-image: radial-gradient(#ccc 5%, #fff 84%, white 11%);height: 40px"></div>
             <div class="list">
                 <div class="listItem"
                     v-for="(item, index) in 6"

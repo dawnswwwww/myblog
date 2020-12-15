@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const miniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
@@ -23,10 +22,6 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                use: [process.env.NODE_ENV !== 'production'
-                ? 'vue-style-loader'
-                : MiniCssExtractPlugin.loader,
-                'css-loader']
             },
             {
                 test: /\.(css|less)$/,
