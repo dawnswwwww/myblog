@@ -3,7 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-// const VueLoaderPlugin = require('vue-loader/plugin')
+const VueSkeletonPlugin = require('vue-skeleton-webpack-plugin')
 console.log(`environment is ${process.env.NODE_ENV}`)
 console.log(`__dirname is ${__dirname}`)
 
@@ -12,7 +12,8 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'main.js'
+    filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[chunkhash:8].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.ts'],
@@ -23,6 +24,16 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true,
+          loader: {
+            js: ["babel-loader?presets[]=es2015"]
+          }
+        }
+      },
       {
         test: /\.(css|less)$/,
         use: ['style-loader','css-loader',  'postcss-loader', 'less-loader']
@@ -48,16 +59,6 @@ module.exports = {
         ]
      },
       {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-				options: {
-					// extractCSS: true,
-					loader: {
-						js: ["babel-loader?presets[]=es2015"]
-					}
-				}
-      },
-      {
         test: /\.(png|jpg|gif|svg|woff|woff2|eot|ttf)$/,
         loader: 'url-loader',
         options: {
@@ -69,12 +70,26 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       // chunks: ['vendors', 'commons']
     }),
-    new VueLoaderPlugin()
+    new webpack.ProgressPlugin(),
+    new VueLoaderPlugin(),
+    new VueSkeletonPlugin({
+      webpackConfig: require('./webpack.skeleton.conf.js'),
+      quiet: false,
+      minimize: true,
+      router: {
+        mode: 'hash',
+        routes: [
+          {
+            path: '/',
+            skeletonId: 'home'
+          }
+        ]
+      }
+    })
   ],
   devServer: {
     contentBase: path.join(__dirname, './dist'),
@@ -92,6 +107,12 @@ module.exports = {
     }
   },
   optimization: {
+    // chunkIds: 'named',
+    // namedChunks: true,
+    // runtimeChunk: {
+    //   name: entrypoint => `${entrypoint.name}`
+    // },
+    // mergeDuplicateChunks: true,
     splitChunks: {
         chunks: "async",// all async initial
         minSize: 30000,
@@ -99,13 +120,13 @@ module.exports = {
         minChunks: 1,
         maxAsyncRequests: 5,
         maxInitialRequests: 3,
-        automaticNameDelimiter: "~",
+        automaticNameDelimiter: "-",
         name: true,
         cacheGroups: {
             vendors: {
                 // test: /[\\/]node_modules[\\/]/,
-                test: /[\\/]node_modules\/vue[\\/]/,
-                priority: 100,
+                // test: /[\\/]node_modules\/vue[\\/]/,
+                priority: 70,
                 name: 'vendors',
                 chunks: 'all'
             },
@@ -116,16 +137,17 @@ module.exports = {
                 priority: 90,
                },
                commons: { // 其他同步加载公共包
-                chunks: 'all',
+                test: /[\\/]node_modules[\\/]/,
+                chunks: 'async',
                 minChunks: 2,
                 name: 'commons',
-                priority: 80,
-               }
-            // default: {
-            //     minChunks: 2,
-            //     priority: -20,
-            //     reuseExistingChunk: true
-            // }
+                priority: 100,
+               },
+            default: {
+                minChunks: 2,
+                priority: -20,
+                reuseExistingChunk: true
+            }
         }
     }
 }

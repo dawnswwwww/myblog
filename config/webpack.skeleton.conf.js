@@ -3,13 +3,14 @@ const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
     mode: 'development',
     target: 'node',
     entry: {
-        skeleton: path.resolve(__dirname, '../src/skeleton.entry.js')
+        app: path.resolve(__dirname, '../src/skeleton.entry.js')
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -20,16 +21,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader'
-                ]
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                use: [process.env.NODE_ENV !== 'production'
+                ? 'vue-style-loader'
+                : MiniCssExtractPlugin.loader,
+                'css-loader']
             },
             {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            }
+                test: /\.(css|less)$/,
+                use: ['style-loader','css-loader',  'postcss-loader', 'less-loader']
+                // use: [
+                //     'vue-style-loader',
+                //     'css-loader',
+                //     'less-loader'
+                // ]
+            },
         ]
     },
     externals: nodeExternals({

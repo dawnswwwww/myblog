@@ -1,6 +1,7 @@
 let UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 let TerserJSPlugin = require('terser-webpack-plugin')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
+const OmmitCSSPlugin = require('./config/ommit-css-webpack-plugin')
 
 console.log('import vue config')
 
@@ -30,7 +31,13 @@ module.exports = {
     }
   },
     configureWebpack: {
+      // output: {
+      //   filename: '[name].[chunkhash.8].js',
+      //   chunksFilename: '[name].[chunkhash.8].js',
+      //   outputDir: './dist'
+      // },
       plugins: [
+        new OmmitCSSPlugin(),
         new SkeletonWebpackPlugin({
           webpackConfig: require('./config/webpack.skeleton.conf.js'),
           quiet: true,
@@ -53,55 +60,61 @@ module.exports = {
         //   }
         // })
       ],
-      optimization: {
-        minimize: true,
-        minimizer: [
-          new TerserJSPlugin({
-            // test: /\.js(\?.*)?$/i,
-            // cache: true, // 是否缓存
-            parallel: true, // 是否并行打包
-            // sourceMap: true,
-            terserOptions: {
-              ecma: undefined,
-              warnings: false,
-              parse: {},
-              compress: {
-                drop_debugger: false,  // 除了这两句是我加的，基他都是默认配置
-                drop_console: true
-              },
-              mangle: true, // Note `mangle.properties` is `false` by default.
-              module: false,
-              output: null,
-              toplevel: false,
-              nameCache: null,
-              ie8: false,
-              keep_classnames: undefined,
-              keep_fnames: false,
-              safari10: false,
-            }
-          })
-        ],
-        splitChunks: {
-            chunks: "async",// all async initial
-            minSize: 30000,
-            maxSize: 300000,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: "~",
-            name: true,
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
-                }
-            }
-        }
-    }
+    //   optimization: {
+    //     minimize: true,
+    //     minimizer: [
+    //       new TerserJSPlugin({
+    //         // test: /\.js(\?.*)?$/i,
+    //         // cache: true, // 是否缓存
+    //         parallel: true, // 是否并行打包
+    //         // sourceMap: true,
+    //         terserOptions: {
+    //           ecma: undefined,
+    //           warnings: false,
+    //           parse: {},
+    //           compress: {
+    //             drop_debugger: false,  // 除了这两句是我加的，基他都是默认配置
+    //             drop_console: true
+    //           },
+    //           mangle: true, // Note `mangle.properties` is `false` by default.
+    //           module: true,
+    //           output: null,
+    //           toplevel: false,
+    //           nameCache: null,
+    //           ie8: false,
+    //           keep_classnames: undefined,
+    //           keep_fnames: true,
+    //           safari10: false,
+    //         }
+    //       })
+    //     ],
+    //     splitChunks: {
+    //         chunks: "async",// all async initial
+    //         minSize: 30000,
+    //         maxSize: 300000,
+    //         minChunks: 1,
+    //         maxAsyncRequests: 5,
+    //         maxInitialRequests: 3,
+    //         automaticNameDelimiter: "~",
+    //         name: true,
+    //         cacheGroups: {
+    //             vendors: {
+    //                 test: /[\\/]node_modules[\\/]/,
+    //                 priority: -10,
+    //                 name(module, chunks, cacheGroupKey) {
+    //                   const moduleFileName = module.identifier().split('/').reduceRight(item => item);
+    //                   const allChunksNames = chunks.map((item) => item.name).join('~');
+    //                   return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+    //                 },
+    //                 chunks: 'all'
+    //             },
+    //             default: {
+    //                 minChunks: 1,
+    //                 priority: -20,
+    //                 reuseExistingChunk: true
+    //             }
+    //         }
+    //     }
+    // }
     }
 }

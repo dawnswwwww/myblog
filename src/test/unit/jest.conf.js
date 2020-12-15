@@ -18,4 +18,4 @@ module.exports = {
         "!src/router/index.ts",
         "!**/node_modules/**",
     ],
-}
+};
